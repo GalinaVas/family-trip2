@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Twin Village — Elementary Task</title>
+  <style>
+    :root{
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --accent:#2b7cff;
+      --text:#1b2430;
+      --muted:#556;
+      --good:#46c26e;
+      --bad:#e15757;
+    }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--text); margin:0; padding:24px;}
+    .container{max-width:900px;margin:0 auto;}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-direction:column;text-align:center;}
+    img.hero{max-width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.15);margin-top:10px;}
+    .card{background:var(--card);border-radius:10px;box-shadow:0 6px 18px rgba(20,30,60,0.06);padding:18px;margin-bottom:16px;}
+    .dialogue{line-height:1.6;}
+    .speaker{font-weight:700;color:var(--accent);margin-right:8px;}
+    .section-title{font-weight:700;margin-top:12px;margin-bottom:8px;color:#233;}
+    form .row{margin-bottom:10px;}
+    label{display:block;font-size:0.95rem;margin-bottom:6px;}
+    input[type="text"], select{padding:8px;border-radius:6px;border:1px solid #d7dbe6;width:100%;box-sizing:border-box;transition:all 0.2s;}
+    input.good, select.good{border:2px solid var(--good);background:#e8fbe8;}
+    input.bad, select.bad{border:2px solid var(--bad);background:#ffecec;}
+    .tf-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .small{font-size:0.9rem;color:var(--muted);}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font-weight:600;margin:4px 4px 0 0;}
+    .btn.secondary{background:#9fb7ff;color:#08254d;}
+    .answers{background:#fff6e6;border-left:4px solid #ffb36b;padding:10px;border-radius:6px;margin-top:10px;display:none;}
+    .result{margin-top:8px;font-weight:700;}
+    footer{margin-top:24px;color:var(--muted);font-size:0.9rem;text-align:center;}
+    @media (max-width:600px){ .tf-list{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="twin_village.jpg" alt="Twin Village" class="hero">
+    </header>
+
+    <section class="card">
+      <div class="section-title">Диалог</div>
+      <div class="dialogue">
+        <p><span class="speaker">Anna:</span> Hello, Ben. Look at my travel plan. I want to visit Kodinhi in south India.</p>
+        <p><span class="speaker">Ben:</span> Kodinhi? Why our trip to Kodinhi? What is special about this place?</p>
+        <p><span class="speaker">Anna:</span> It’s a very interesting place. Its nickname is 'Twin Village'. There are many, many twins there!</p>
+        <p><span class="speaker">Ben:</span> Oh, really? Is that normal?</p>
+        <p><span class="speaker">Anna:</span> No, it is not normal. The text says there are 290 families. And their babies are often twins. In one family, there are seven boys! Four of them are twins.</p>
+        <p><span class="speaker">Ben:</span> Wow! Their parents must be very busy! Do you have a sister or a brother?</p>
+        <p><span class="speaker">Anna:</span> Yes, I have one sister. Her name is Kate. She is a teacher. What about you, Ben?</p>
+        <p><span class="speaker">Ben:</span> I have one brother. His name is Tom. He lives in Canada with his family. Our parents live here with us.</p>
+        <p><span class="speaker">Anna:</span> That’s nice. So, Kodinhi is a great idea. We can ask people about their lives and their families.</p>
+        <p><span class="speaker">Ben:</span> Okay, let’s go! I think it's a wonderful plan for us.</p>
+      </div>
+    </section>
+
+    <section class="card" id="tasks">
+      <div class="section-title">2. Задания на понимание и грамматику</div>
+
+      <!-- Task A -->
+      <h3 class="small">Задание A: True or False</h3>
+      <div class="tf-list">
+        <div><label>1. Anna wants to visit China.</label>
+          <select id="tf1">
+            <option value="">-- choose --</option>
+            <option value="T">True</option>
+            <option value="F">False</option>
+          </select>
+        </div>
+        <div><label>2. Kodinhi is a 'Twin Village'.</label>
+          <select id="tf2">
+            <option value="">-- choose --</option>
+            <option value="T">True</option>
+            <option value="F">False</option>
+          </select>
+        </div>
+        <div><label>3. Many families in Kodinhi have twins.</label>
+          <select id="tf3">
+            <option value="">-- choose --</option>
+            <option value="T">True</option>
+            <option value="F">False</option>
+          </select>
+        </div>
+        <div><label>4. Anna has two sisters.</label>
+          <select id="tf4">
+            <option value="">-- choose --</option>
+            <option value="T">True</option>
+            <option value="F">False</option>
+          </select>
+        </div>
+        <div><label>5. Ben’s brother lives in the US.</label>
+          <select id="tf5">
+            <option value="">-- choose --</option>
+            <option value="T">True</option>
+            <option value="F">False</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="checkA()">Проверить A</button>
+
+      <!-- Task B -->
+      <h3 class="small" style="margin-top:16px;">Задание B: Complete the Sentences</h3>
+      <form id="taskB" onsubmit="return false;">
+        <div class="row"><label>1. Anna and Ben are going on ______ trip to India.</label><input type="text" id="b1"></div>
+        <div class="row"><label>2. Kodinhi is famous. ______ nickname is 'Twin Village'.</label><input type="text" id="b2"></div>
+        <div class="row"><label>3. Anna says, "Look at ______ travel plan."</label><input type="text" id="b3"></div>
+        <div class="row"><label>4. Ben's brother lives with ______ family.</label><input type="text" id="b4"></div>
+        <div class="row"><label>5. Anna has one sister. ______ name is Kate.</label><input type="text" id="b5"></div>
+        <div class="row"><label>6. The families in Kodinhi talk about ______ life.</label><input type="text" id="b6"></div>
+      </form>
+      <button class="btn" onclick="checkB()">Проверить B</button>
+      <div id="resultB" class="result"></div>
+
+      <!-- Task C -->
+      <h3 class="small" style="margin-top:16px;">Задание C: Personal Pronouns</h3>
+      <form id="taskC" onsubmit="return false;">
+        <div class="row"><label>1. Kate is Anna’s sister. (He / She) is a teacher.</label><input type="text" id="c1"></div>
+        <div class="row"><label>2. Kodinhi is interesting. (It / He) has a special name.</label><input type="text" id="c2"></div>
+        <div class="row"><label>3. Ben has a brother. (He / They) lives in Canada.</label><input type="text" id="c3"></div>
+        <div class="row"><label>4. Anna and Ben are friends. (We / They) are planning a trip.</label><input type="text" id="c4"></div>
+        <div class="row"><label>5. Tom lives with his family. (He / They) are in Canada.</label><input type="text" id="c5"></div>
+      </form>
+      <button class="btn" onclick="checkC()">Проверить C</button>
+    </section>
+
+    <!-- Buttons and Keys at the bottom -->
+    <section class="card">
+      <button class="btn secondary" onclick="showKeys()">Показать ключи</button>
+      <button class="btn" onclick="resetAll()">Сбросить ответы</button>
+
+      <div id="keys" class="answers">
+        <strong>Ключи:</strong>
+        <p><b>A:</b> F, T, T, F, F</p>
+        <p><b>B:</b> our, its, my, his, her, their</p>
+        <p><b>C:</b> She, It, He, They, They</p>
+      </div>
+    </section>
+
+    <footer class="small">
+      Подсказка для преподавателя: прочитайте диалог, выполните задания A–C и обсудите вопросы в парах.
+    </footer>
+  </div>
+
+<script>
+const keyA = ['F','T','T','F','F'];
+const keyB = ['our','its','my','his','her','their'];
+const keyC = ['she','it','he','they','they'];
+
+function checkA(){
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById('tf'+i);
+    const val=el.value;
+    el.classList.remove('good','bad');
+    if(val==='') continue;
+    if(val===keyA[i-1]) el.classList.add('good'); else el.classList.add('bad');
+  }
+}
+
+function checkB(){
+  let correct=0;
+  for(let i=1;i<=6;i++){
+    const el=document.getElementById('b'+i);
+    el.classList.remove('good','bad');
+    const val=el.value.trim().toLowerCase();
+    if(val===keyB[i-1]){el.classList.add('good');correct++;}else el.classList.add('bad');
+  }
+  document.getElementById('resultB').textContent=`Правильных ответов: ${correct} из 6.`;
+}
+
+function checkC(){
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById('c'+i);
+    el.classList.remove('good','bad');
+    const val=el.value.trim().toLowerCase();
+    if(val===keyC[i-1]) el.classList.add('good'); else el.classList.add('bad');
+  }
+}
+
+function showKeys(){
+  const k=document.getElementById('keys');
+  k.style.display=(k.style.display==='block'?'none':'block');
+}
+
+function resetAll(){
+  const inputs=document.querySelectorAll('input[type="text"], select');
+  inputs.forEach(el=>{
+    el.value='';
+    el.classList.remove('good','bad');
+  });
+  document.getElementById('resultB').textContent='';
+  document.getElementById('keys').style.display='none';
+}
+</script>
+</body>
+</html>
